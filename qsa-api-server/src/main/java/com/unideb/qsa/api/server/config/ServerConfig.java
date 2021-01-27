@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,7 @@ public class ServerConfig {
     }
 
     @Bean
+    @ConditionalOnProperty(value = "geo.enabled", havingValue = "true")
     public DatabaseReader maxmindDatabaseReader() throws IOException {
         LOG.info(GEO_CONFIGURATION_LOG, metricsGeoEnabled, path);
         return new DatabaseReader.Builder(new File(path))
