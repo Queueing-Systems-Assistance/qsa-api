@@ -1,0 +1,73 @@
+# Spring Metrics
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: info,health,prometheus
+  metrics:
+    tags:
+      application: QSA.${spring.application.name}.${spring.profiles.active}
+    enabled: >
+      jvm.memory.used,
+      jvm.memory.max,
+      process.uptime,
+      process.cpu.usage,
+      http.server.requests
+  endpoint:
+    prometheus:
+      enabled: true
+    info:
+      enabled: true
+    health:
+      enabled: true
+
+# Spring Application
+spring:
+  main:
+    banner-mode: "off"
+  mvc:
+    throw-exception-if-no-handler-found: true
+    servlet:
+      load-on-startup: 1
+  application:
+    name: api
+  profiles:
+    active: dev
+  web:
+    resources:
+      add-mappings: false
+    locale-resolver: accept_header
+
+# Client Config
+client:
+  config:
+    timeout: 5000
+    read-timeout: 5000
+    write-timeout: 5000
+  calculator:
+    scheme: https
+    host: qsa.inf.unideb.hu
+    port: 443
+    endpoint:
+      output-feature: /lab/api/calculator/system/%s/outputs
+      output-feature-stream: /lab/api/calculator/system/%s/outputs/stream
+      system-element: /lab/api/calculator/system
+  formula-handler:
+    scheme: https
+    host: qsa.inf.unideb.hu
+    port: 443
+    endpoint:
+      formula-default: /lab/api/formula-handler/formula/default/%s/%s
+      formula-steps: /lab/api/formula-handler/formula/steps/%s/%s
+      formula-calculated: /lab/api/formula-handler/formula/calculated/%s/%s
+
+graphql:
+  servlet:
+    exception-handlers-enabled: true
+
+# Geolocation
+geo:
+  path: GeoLite2-City.mmdb
+  enabled: false
+

@@ -1,0 +1,11 @@
+description = 'qsa-api-client'
+
+dependencies {
+	/* PROJECT */
+	implementation project(':qsa-api-domain')
+	/* DEPENDENCY */
+	implementation 'io.projectreactor:reactor-core'
+	implementation 'org.springframework:spring-context'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'com.graphql-java:graphql-java-tools'
+}

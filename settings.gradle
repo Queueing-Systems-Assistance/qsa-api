@@ -1,0 +1,6 @@
+rootProject.name = 'qsa-api'
+
+include(':qsa-api-domain')
+include(':qsa-api-client')
+include(':qsa-api-implementation')
+include(':qsa-api-server')

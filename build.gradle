@@ -1,0 +1,80 @@
+plugins {
+  id 'java'
+  id 'java-library'
+  id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+  id 'maven-publish'
+  id 'checkstyle'
+}
+
+ext {
+  /* Project Information */
+  projectGroup = 'com.unideb.qsa'
+  projectVersion = project.getProperties().get('release.version') ?: 'RELEASE.VERSION.UNKNOWN'
+  /* Secrets */
+  // Note: Use your own name and token
+  print('Release version [' + projectVersion + ']')
+}
+
+
+allprojects {
+
+  apply plugin: 'java'
+  apply plugin: 'java-library'
+  apply plugin: 'io.spring.dependency-management'
+  apply plugin: 'maven'
+  apply plugin: 'checkstyle'
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+      url 'https://jitpack.io'
+    }
+  }
+
+  dependencyManagement {
+    dependencies {
+      /* DEPENDENCY */
+      imports {
+        mavenBom('org.springframework.boot:spring-boot-dependencies:2.4.1')
+      }
+      dependency 'com.fasterxml.jackson.core:jackson-core:2.12.0'
+      dependency 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
+      dependency 'com.fasterxml.jackson.core:jackson-annotations:2.12.0'
+      dependency 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+      dependency 'com.graphql-java:graphql-java-tools:5.2.4'
+      dependency 'io.projectreactor:reactor-core:3.4.1'
+      dependency 'com.maxmind.geoip2:geoip2:2.15.0'
+      dependency 'io.micrometer:micrometer-registry-prometheus:1.6.2'
+      dependency 'net.logstash.logback:logstash-logback-encoder:6.6'
+      dependency 'org.springframework:spring-context:5.3.2'
+      dependency 'org.springframework.boot:spring-boot-starter-web:2.4.1'
+      dependency 'org.springframework.boot:spring-boot-starter-actuator:2.4.1'
+      dependency 'org.springframework.boot:spring-boot-starter-webflux:2.4.0'
+    }
+  }
+
+  checkstyle {
+    toolVersion = '8.38'
+    configFile = file("${rootDir}/support/code-formatting/checkstyle/checkstyle.xml")
+    configDirectory = file("${rootDir}/support/code-formatting/checkstyle/")
+    showViolations = true
+    ignoreFailures = false
+  }
+
+  group = projectGroup
+  version = projectVersion
+  sourceCompatibility = '11'
+
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+  tasks.withType(Checkstyle) {
+    reports {
+      xml.enabled false
+      html.enabled false
+    }
+  }
+}

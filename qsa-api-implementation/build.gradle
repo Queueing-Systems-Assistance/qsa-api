@@ -1,0 +1,14 @@
+dependencies {
+	/* PROJECT */
+	implementation project(':qsa-api-domain')
+	implementation project(':qsa-api-client')
+	/* DEPENDENCY */
+	implementation 'com.maxmind.geoip2:geoip2'
+	implementation 'com.graphql-java:graphql-spring-boot-starter'
+	implementation 'com.graphql-java:graphql-java-tools'
+	implementation 'io.projectreactor:reactor-core'
+	implementation 'org.springframework:spring-context'
+	implementation 'com.graphql-java:graphql-spring-boot-starter'
+}
+
+description = 'qsa-api-implementation'
