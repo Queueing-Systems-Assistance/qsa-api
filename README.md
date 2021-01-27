@@ -1,33 +1,16 @@
-# QSA Calculator [![Build Status](https://travis-ci.com/Queueing-Systems-Assistance/qsa-calculator.svg?branch=master)](https://travis-ci.com/Queueing-Systems-Assistance/qsa-calculator)
+# QSA API ![CircleCI](https://img.shields.io/circleci/build/github/Queueing-Systems-Assistance/qsa-api/master)
 
 ### Project description
 
-**QSA Calculator** is the main module for the Queueing Systems Assistance project. This module is responsible for calculating system features, report metrics, and logs.
+This service is the door, acts as a facade for the QSA architecture.
+It creates a main entry point using GraphQL to call the underlying services such as calculator, formula-handler, i18n-service, etc. 
 
-- Calculate queue details
-- Visualize queue properties
+### Endpoints
 
-For those who want to help develop the application:
-- [Git workflow](https://github.com/Queueing-Systems-Assistance/qsa-application/docs/git-workflow.md)
-- Build the app pack:
-  - Use `gradle clean build` to build the project
-  - You can run the application, just start `Application.java` main entry point
+- For different locales, set the `Accept-Language` header value (en_US, hu_HU, etc.)
 
+#### /graphql
 
-The application contains several modules:
-
-- qsa-calculator-domain
-  - contains all domain objects (POJOs)
-- qsa-calculator-implementation
-  - here you can find the implementation of the math
-  - resolves systems and values, exception messages
-  - determines where is the request origin country
-  - also validates the resources
-- qsa-calculator-server
-  - responsible for the access of the application
-  - integration tests for the application
-
-Contributors:
-
-- Szilágyi Zoltán
-- Szászi Szabolcs
+- Accepts only POST request
+- Need a valid GraphQL body
+- Schema found under `qsa-api-server/src/resources/schema.graphqls`

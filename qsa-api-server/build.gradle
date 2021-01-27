@@ -21,7 +21,7 @@ dependencies {
 description = 'qsa-api-server'
 
 bootJar {
-	archiveFileName = 'qsa-api.jar'
+	archiveFileName = 'qsa-api-final.jar'
 }
 
 springBoot {
