@@ -24,10 +24,12 @@ public class CorsFilter extends OncePerRequestFilter {
             "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers";
     private static final String ACCESS_CONTROL_EXPOSE_HEADERS = "Access-Control-Expose-Headers";
     private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
+    private static final String ACCESS_CONTROL_MAX_AGE = "Access-Control-Max-Age";
     private static final String ACCESS_CONTROL_ALLOW_ORIGIN_VALUE = "*";
-    private static final String ACCESS_CONTROL_ALLOW_METHODS_VALUE = "GET, POST";
+    private static final String ACCESS_CONTROL_ALLOW_METHODS_VALUE = "GET, POST, DELETE, PUT, PATCH, HEAD";
     private static final String ACCESS_CONTROL_EXPOSE_HEADERS_VALUE = "Access-Control-Allow-Origin, Access-Control-Allow-Credentials";
     private static final String ACCESS_CONTROL_ALLOW_CREDENTIALS_VALUE = "true";
+    private static final int ACCESS_CONTROL_MAX_AGE_VALUE = 10;
 
     @Override
     protected void doFilterInternal(
@@ -39,6 +41,7 @@ public class CorsFilter extends OncePerRequestFilter {
         response.addHeader(ACCESS_CONTROL_ALLOW_HEADERS, ACCESS_CONTROL_ALLOW_HEADERS_VALUE);
         response.addHeader(ACCESS_CONTROL_EXPOSE_HEADERS, ACCESS_CONTROL_EXPOSE_HEADERS_VALUE);
         response.addHeader(ACCESS_CONTROL_ALLOW_CREDENTIALS, ACCESS_CONTROL_ALLOW_CREDENTIALS_VALUE);
+        response.addIntHeader(ACCESS_CONTROL_MAX_AGE, ACCESS_CONTROL_MAX_AGE_VALUE);
         filterChain.doFilter(request, response);
     }
 }
