@@ -25,7 +25,7 @@ type SystemElement {
         requestedOutputFeatureIds:[String!]
     ): [OutputFeature]!
     outputsStream(
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         requestedOutputFeatureIds:[String!]
         stream:StreamOutput!
     ): StreamOutputFeature!

@@ -37,6 +37,7 @@ public class WebClientGateway<RESPONSE> implements Gateway<RESPONSE> {
 
     @Override
     public <REQUEST> RESPONSE call(QsaApiRequest<REQUEST> request) {
+        LOGGER.info("Calling to call {}: {}", gatewayConfiguration.getTargetApp(), getComponents(request));
         Map<String, String> mdc = MDC.getCopyOfContextMap();
         return createWebClientRequest(request)
                 .retrieve()
