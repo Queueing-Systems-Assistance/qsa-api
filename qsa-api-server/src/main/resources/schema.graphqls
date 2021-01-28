@@ -21,7 +21,7 @@ type SystemElement {
     status:String
     inputs:[InputFeature!]!
     outputs(
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         requestedOutputFeatureIds:[String!]
     ): [OutputFeature]!
     outputsStream(
@@ -31,7 +31,7 @@ type SystemElement {
     ): StreamOutputFeature!
     formula(
         featureId:String!
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         formulaType: FormulaType
     ): [String!]!
 }

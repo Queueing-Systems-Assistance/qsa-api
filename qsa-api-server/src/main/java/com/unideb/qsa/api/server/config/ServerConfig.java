@@ -16,8 +16,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.maxmind.db.Reader;
 import com.maxmind.geoip2.DatabaseReader;
@@ -63,6 +66,17 @@ public class ServerConfig {
                                .filter(isEnabled -> isEnabled)
                                .map(isEnabled -> MeterFilterReply.ACCEPT)
                                .orElse(MeterFilterReply.DENY);
+            }
+        };
+    }
+
+    @Bean
+    @Profile(value = "dev | lab")
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(@NonNull CorsRegistry registry) {
+                registry.addMapping("/graphql").allowedOrigins("http://localhost:4200");
             }
         };
     }
