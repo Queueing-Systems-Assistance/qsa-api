@@ -26,6 +26,7 @@ public class WebClientGateway<RESPONSE> implements Gateway<RESPONSE> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebClientGateway.class);
     private static final String FAILED_CALL_EXCEPTION_MESSAGE = "Failed to call {}: {}";
+    private static final String CALL_MESSAGE = "Calling to call {}: {}";
 
     private final WebClient webClient;
     private final GatewayConfiguration<RESPONSE, ? extends ApiInternalException> gatewayConfiguration;
@@ -37,7 +38,7 @@ public class WebClientGateway<RESPONSE> implements Gateway<RESPONSE> {
 
     @Override
     public <REQUEST> RESPONSE call(QsaApiRequest<REQUEST> request) {
-        LOGGER.info("Calling to call {}: {}", gatewayConfiguration.getTargetApp(), getComponents(request));
+        LOGGER.info(CALL_MESSAGE, gatewayConfiguration.getTargetApp(), getComponents(request));
         Map<String, String> mdc = MDC.getCopyOfContextMap();
         return createWebClientRequest(request)
                 .retrieve()
