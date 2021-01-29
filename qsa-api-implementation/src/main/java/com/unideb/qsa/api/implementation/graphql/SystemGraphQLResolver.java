@@ -58,7 +58,7 @@ public class SystemGraphQLResolver implements GraphQLResolver<SystemElement> {
      * @param featureConditions input features
      * @return resolved formulas.
      */
-    public List<String> getFormula(SystemElement systemElement, String featureId, List<FeatureCondition> featureConditions, FormulaType formulaType) {
+    public String getFormula(SystemElement systemElement, String featureId, List<FeatureCondition> featureConditions, FormulaType formulaType) {
         return formulaCalculationFacade.getFormula(systemElement, featureId, featureConditions, formulaType);
     }
 

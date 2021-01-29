@@ -33,23 +33,19 @@ public class FormulaCalculationFacade {
      * @param formulaType       type of the requested formula
      * @return resolved formula
      */
-    public List<String> getFormula(SystemElement systemElement, String featureId, List<FeatureCondition> featureConditions, FormulaType formulaType) {
+    public String getFormula(SystemElement systemElement, String featureId, List<FeatureCondition> featureConditions, FormulaType formulaType) {
         String systemId = systemElement.getId();
-        var result = List.<String>of();
-        if (FormulaType.CALCULATED == formulaType) {
-            result = formulaHandlerFormulaCalculatedClient.getFormulaCalculated(systemId, featureId, featureConditions);
-        } else {
-            result = getSimpleFormulas(systemId, featureId, formulaType);
-        }
-        return result;
-    }
-
-    private List<String> getSimpleFormulas(String systemId, String featureId, FormulaType formulaType) {
-        var result = List.<String>of();
-        if (FormulaType.ELEMENTS == formulaType) {
-            result = formulaHandlerFormulaStepsClient.getFormulaSteps(systemId, featureId);
-        } else {
-            result = formulaHandlerFormulaDefaultClient.getFormulaDefault(systemId, featureId);
+        var result = "";
+        switch(formulaType) {
+            case DEFAULT:
+                result = formulaHandlerFormulaDefaultClient.getFormulaDefault(systemId, featureId);
+                break;
+            case ELEMENTS:
+                result = formulaHandlerFormulaStepsClient.getFormulaSteps(systemId, featureId);
+                break;
+            case CALCULATED:
+                result = formulaHandlerFormulaCalculatedClient.getFormulaCalculated(systemId, featureId, featureConditions);
+                break;
         }
         return result;
     }

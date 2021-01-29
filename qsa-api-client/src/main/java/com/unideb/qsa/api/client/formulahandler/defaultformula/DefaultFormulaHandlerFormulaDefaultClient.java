@@ -23,9 +23,8 @@ public class DefaultFormulaHandlerFormulaDefaultClient implements FormulaHandler
     }
 
     @Override
-    public List<String> getFormulaDefault(String systemId, String featureId) {
+    public String getFormulaDefault(String systemId, String featureId) {
         URI uri = uriCreator.createUri(systemId, featureId);
-        String response = genericClient.call(EMPTY_REQUEST_BODY, uri);
-        return List.of(response);
+        return genericClient.call(EMPTY_REQUEST_BODY, uri);
     }
 }

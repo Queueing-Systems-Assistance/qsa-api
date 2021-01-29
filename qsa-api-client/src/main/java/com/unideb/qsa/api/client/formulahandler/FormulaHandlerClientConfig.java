@@ -26,9 +26,9 @@ public class FormulaHandlerClientConfig {
     @Autowired
     private Gateway<String> formulaDefaultFormulaHandlerGateway;
     @Autowired
-    private Gateway<List<String>> formulaStepsFormulaHandlerGateway;
+    private Gateway<String> formulaStepsFormulaHandlerGateway;
     @Autowired
-    private Gateway<List<String>> formulaCalculatedFormulaHandlerGateway;
+    private Gateway<String> formulaCalculatedFormulaHandlerGateway;
     @Autowired
     private UriCreator formulaHandlerFormulaDefaultUriCreator;
     @Autowired

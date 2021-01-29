@@ -15,6 +15,6 @@ public interface FormulaHandlerFormulaCalculatedClient {
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions);
+    String getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions);
 
 }

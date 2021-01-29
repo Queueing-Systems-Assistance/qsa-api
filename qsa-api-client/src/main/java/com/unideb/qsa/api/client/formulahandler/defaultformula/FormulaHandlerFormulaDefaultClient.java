@@ -12,5 +12,5 @@ public interface FormulaHandlerFormulaDefaultClient {
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaDefault(String systemId, String featureId);
+    String getFormulaDefault(String systemId, String featureId);
 }

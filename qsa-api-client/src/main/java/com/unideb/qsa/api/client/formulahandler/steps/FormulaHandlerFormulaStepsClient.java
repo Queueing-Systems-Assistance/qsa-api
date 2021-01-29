@@ -12,5 +12,5 @@ public interface FormulaHandlerFormulaStepsClient {
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaSteps(String systemId, String featureId);
+    String getFormulaSteps(String systemId, String featureId);
 }

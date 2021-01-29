@@ -14,15 +14,15 @@ public class DefaultFormulaHandlerFormulaCalculatedClient implements FormulaHand
 
 
     private final UriCreator uriCreator;
-    private final GenericClient<List<String>> genericClient;
+    private final GenericClient<String> genericClient;
 
-    public DefaultFormulaHandlerFormulaCalculatedClient(GenericClient<List<String>> genericClient, UriCreator uriCreator) {
+    public DefaultFormulaHandlerFormulaCalculatedClient(GenericClient<String> genericClient, UriCreator uriCreator) {
         this.uriCreator = uriCreator;
         this.genericClient = genericClient;
     }
 
     @Override
-    public List<String> getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions) {
+    public String getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions) {
         URI uri = uriCreator.createUri(systemId, featureId);
         return genericClient.call(featureConditions, uri);
     }

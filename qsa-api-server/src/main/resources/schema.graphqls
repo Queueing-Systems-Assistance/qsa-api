@@ -33,7 +33,7 @@ type SystemElement {
         featureId:String!
         inputFeatureConditions:[FeatureCondition!]!
         formulaType: FormulaType
-    ): [String!]!
+    ): String!
 }
 
 enum FormulaType {
