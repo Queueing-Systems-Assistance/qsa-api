@@ -1,7 +1,5 @@
 package com.unideb.qsa.api.client.formulahandler.defaultformula;
 
-import java.util.List;
-
 /**
  * Interface for default output feature formula calculation.
  */
@@ -12,5 +10,5 @@ public interface FormulaHandlerFormulaDefaultClient {
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaDefault(String systemId, String featureId);
+    String getFormulaDefault(String systemId, String featureId);
 }

@@ -9,12 +9,11 @@ import com.unideb.qsa.api.domain.api.request.FeatureCondition;
  */
 public interface FormulaHandlerFormulaCalculatedClient {
 
-
     /**
      * Calculate default output feature formula for a given system.
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions);
+    String getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions);
 
 }

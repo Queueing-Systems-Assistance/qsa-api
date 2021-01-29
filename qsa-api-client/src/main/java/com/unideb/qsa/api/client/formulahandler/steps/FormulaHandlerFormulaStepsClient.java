@@ -1,7 +1,5 @@
 package com.unideb.qsa.api.client.formulahandler.steps;
 
-import java.util.List;
-
 /**
  * Interface for steps output feature formula calculation.
  */
@@ -12,5 +10,5 @@ public interface FormulaHandlerFormulaStepsClient {
      * @param systemId  system id
      * @param featureId output feature id
      */
-    List<String> getFormulaSteps(String systemId, String featureId);
+    String getFormulaSteps(String systemId, String featureId);
 }

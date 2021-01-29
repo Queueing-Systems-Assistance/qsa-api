@@ -47,12 +47,12 @@ public class FormulaHandlerGatewayConfig {
     }
 
     @Bean
-    public Gateway<List<String>> formulaStepsFormulaHandlerGateway() {
+    public Gateway<String> formulaStepsFormulaHandlerGateway() {
         return new WebClientGateway<>(webClient, formulaStepsGatewayConfig());
     }
 
     @Bean
-    public Gateway<List<String>> formulaCalculatedFormulaHandlerGateway() {
+    public Gateway<String> formulaCalculatedFormulaHandlerGateway() {
         return new WebClientGateway<>(webClient, formulaCalculatedGatewayConfig());
     }
 
@@ -66,22 +66,22 @@ public class FormulaHandlerGatewayConfig {
                 .build();
     }
 
-    private GatewayConfiguration<List<String>, GatewayException> formulaStepsGatewayConfig() {
-        return new GatewayConfiguration.Builder<List<String>, GatewayException>()
+    private GatewayConfiguration<String, GatewayException> formulaStepsGatewayConfig() {
+        return new GatewayConfiguration.Builder<String, GatewayException>()
                 .withTargetApp(TARGET_APP_DISPLAY_NAME)
                 .withExceptionProvider(EXCEPTION_PROVIDER)
                 .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)
-                .withResponseType(new ParameterizedTypeReference<List<String>>() {})
+                .withResponseType(new ParameterizedTypeReference<String>() {})
                 .withHttpMethod(HttpMethod.POST)
                 .build();
     }
 
-    private GatewayConfiguration<List<String>, GatewayException> formulaCalculatedGatewayConfig() {
-        return new GatewayConfiguration.Builder<List<String>, GatewayException>()
+    private GatewayConfiguration<String, GatewayException> formulaCalculatedGatewayConfig() {
+        return new GatewayConfiguration.Builder<String, GatewayException>()
                 .withTargetApp(TARGET_APP_DISPLAY_NAME)
                 .withExceptionProvider(EXCEPTION_PROVIDER)
                 .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)
-                .withResponseType(new ParameterizedTypeReference<List<String>>() {})
+                .withResponseType(new ParameterizedTypeReference<String>() {})
                 .withHttpMethod(HttpMethod.POST)
                 .build();
     }
