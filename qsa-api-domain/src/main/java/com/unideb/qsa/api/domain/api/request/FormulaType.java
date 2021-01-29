@@ -5,6 +5,6 @@ package com.unideb.qsa.api.domain.api.request;
  */
 public enum FormulaType {
     DEFAULT,
-    ELEMENTS,
+    STEPS,
     CALCULATED
 }

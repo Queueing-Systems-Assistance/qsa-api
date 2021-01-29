@@ -1,7 +1,5 @@
 package com.unideb.qsa.api.client.formulahandler;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,9 +24,9 @@ public class FormulaHandlerClientConfig {
     @Autowired
     private Gateway<String> formulaDefaultFormulaHandlerGateway;
     @Autowired
-    private Gateway<List<String>> formulaStepsFormulaHandlerGateway;
+    private Gateway<String> formulaStepsFormulaHandlerGateway;
     @Autowired
-    private Gateway<List<String>> formulaCalculatedFormulaHandlerGateway;
+    private Gateway<String> formulaCalculatedFormulaHandlerGateway;
     @Autowired
     private UriCreator formulaHandlerFormulaDefaultUriCreator;
     @Autowired

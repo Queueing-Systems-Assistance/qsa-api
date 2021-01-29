@@ -21,24 +21,24 @@ type SystemElement {
     status:String
     inputs:[InputFeature!]!
     outputs(
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         requestedOutputFeatureIds:[String!]
     ): [OutputFeature]!
     outputsStream(
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         requestedOutputFeatureIds:[String!]
         stream:StreamOutput!
     ): StreamOutputFeature!
     formula(
         featureId:String!
-        inputFeatueConditions:[FeatureCondition!]!
+        inputFeatureConditions:[FeatureCondition!]!
         formulaType: FormulaType
-    ): [String!]!
+    ): String!
 }
 
 enum FormulaType {
     DEFAULT
-    ELEMENTS
+    STEPS
     CALCULATED
 }
 

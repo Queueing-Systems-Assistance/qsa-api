@@ -32,11 +32,10 @@ public class SystemGraphQLQueryResolver implements GraphQLQueryResolver {
      * @param systemIds requested system ids
      * @return resolved {@link SystemElement}s.
      */
-    public List<SystemElement> getSystemElements(@Nullable List<String> systemIds, DataFetchingEnvironment environmentnv) {
-        localeUpdater.updateLocale(environmentnv.getContext());
+    public List<SystemElement> getSystemElements(@Nullable List<String> systemIds, DataFetchingEnvironment environment) {
+        localeUpdater.updateLocale(environment.getContext());
         List<String> requestedSystemElements = resolveSystemIds(systemIds);
         return new ArrayList<>(calculatorSystemElementClient.getSystems(requestedSystemElements));
-
     }
 
     private List<String> resolveSystemIds(List<String> systemIds) {
