@@ -2,6 +2,8 @@ package com.unideb.qsa.api.client.formulahandler.calculated;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.unideb.qsa.api.client.config.UriCreator;
 import com.unideb.qsa.api.client.config.client.GenericClient;
@@ -24,6 +26,7 @@ public class DefaultFormulaHandlerFormulaCalculatedClient implements FormulaHand
     @Override
     public String getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions) {
         URI uri = uriCreator.createUri(systemId, featureId);
-        return genericClient.call(featureConditions, uri);
+        Map<String, String> requestBody = featureConditions.stream().collect(Collectors.toMap(FeatureCondition::getId, FeatureCondition::getValue));
+        return genericClient.call(requestBody, uri);
     }
 }
