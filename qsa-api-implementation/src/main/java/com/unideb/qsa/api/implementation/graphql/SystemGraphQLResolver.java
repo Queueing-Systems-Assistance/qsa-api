@@ -39,6 +39,16 @@ public class SystemGraphQLResolver implements GraphQLResolver<SystemElement> {
     }
 
     /**
+     * Get available system output features.
+     * @param systemElement             resolved system element
+     * @param requestedOutputFeatureIds requested output feature ids
+     * @return Output features
+     */
+    public List<OutputFeature> getAvailableOutputs(SystemElement systemElement, List<String> requestedOutputFeatureIds) {
+        return outputFeatureCalculationFacade.getAvailableOutputs(systemElement, requestedOutputFeatureIds);
+    }
+
+    /**
      * Calculates system output features.
      * @param systemElement             resolved system element
      * @param featureConditions         input features
@@ -61,5 +71,4 @@ public class SystemGraphQLResolver implements GraphQLResolver<SystemElement> {
     public String getFormula(SystemElement systemElement, String featureId, List<FeatureCondition> featureConditions, FormulaType formulaType) {
         return formulaCalculationFacade.getFormula(systemElement, featureId, featureConditions, formulaType);
     }
-
 }

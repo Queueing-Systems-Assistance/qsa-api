@@ -20,6 +20,7 @@ type SystemElement {
     description:String
     status:String
     inputs:[InputFeature!]!
+    availableOutputs(requestedOutputFeatureIds:[String!]): [OutputFeature!]!
     outputs(
         inputFeatureConditions:[FeatureCondition!]!
         requestedOutputFeatureIds:[String!]

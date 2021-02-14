@@ -52,6 +52,7 @@ client:
     endpoint:
       output-feature: /lab/api/calculator/system/%s/outputs
       output-feature-stream: /lab/api/calculator/system/%s/outputs/stream
+      available-output-feature: /lab/api/calculator/system/%s/outputs/available
       system-element: /lab/api/calculator/system
   formula-handler:
     scheme: https

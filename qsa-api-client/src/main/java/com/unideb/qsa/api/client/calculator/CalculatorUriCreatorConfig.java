@@ -26,6 +26,8 @@ public class CalculatorUriCreatorConfig {
     private String endpointSystemElement;
     @Value("${client.calculator.endpoint.output-feature-stream}")
     private String endpointStreamOutputFeature;
+    @Value("${client.calculator.endpoint.available-output-feature}")
+    private String endpointAvailableOutputFeature;
 
     @Bean
     public UriCreator calculatorOutputFeatureUriCreator() {
@@ -42,4 +44,8 @@ public class CalculatorUriCreatorConfig {
         return new UriCreator(scheme, host, port, endpointStreamOutputFeature);
     }
 
+    @Bean
+    public UriCreator calculatorAvailableOutputFeatureUriCreator() {
+        return new UriCreator(scheme, host, port, endpointAvailableOutputFeature);
+    }
 }
