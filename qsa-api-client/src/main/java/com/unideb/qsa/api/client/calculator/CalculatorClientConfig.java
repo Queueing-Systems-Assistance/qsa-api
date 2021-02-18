@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.unideb.qsa.api.client.calculator.output.CalculatorOutputFeatureClient;
 import com.unideb.qsa.api.client.calculator.output.DefaultCalculatorOutputFeatureClient;
+import com.unideb.qsa.api.client.calculator.output.available.CalculatorAvailableOutputFeatureClient;
+import com.unideb.qsa.api.client.calculator.output.available.DefaultCalculatorAvailableOutputFeatureClient;
 import com.unideb.qsa.api.client.calculator.output.stream.CalculatorStreamOutputFeatureClient;
 import com.unideb.qsa.api.client.calculator.output.stream.DefaultCalculatorStreamOutputClient;
 import com.unideb.qsa.api.client.calculator.system.CalculatorSystemElementClient;
@@ -33,22 +35,28 @@ public class CalculatorClientConfig {
     @Autowired
     private Gateway<StreamOutputFeature> streamOutputFeatureResponseGateway;
     @Autowired
+    private Gateway<List<OutputFeature>> availableOutputFeatureResponseGateway;
+    @Autowired
     private UriCreator calculatorOutputFeatureUriCreator;
     @Autowired
     private UriCreator calculatorStreamOutputFeatureUriCreator;
     @Autowired
     private UriCreator calculatorSystemElementUriCreator;
     @Autowired
+    private UriCreator calculatorAvailableOutputFeatureUriCreator;
+    @Autowired
     private HeaderFactory compositeRequestHeadersFactory;
 
     @Bean
     public CalculatorOutputFeatureClient calculatorOutputFeatureClient() {
-        return new DefaultCalculatorOutputFeatureClient(new GenericClient<>(outputFeatureCalculatorGateway, compositeRequestHeadersFactory), calculatorOutputFeatureUriCreator);
+        return new DefaultCalculatorOutputFeatureClient(new GenericClient<>(outputFeatureCalculatorGateway, compositeRequestHeadersFactory),
+                calculatorOutputFeatureUriCreator);
     }
 
     @Bean
     public CalculatorSystemElementClient calculatorSystemElementClient() {
-        return new DefaultCalculatorSystemElementClient(new GenericClient<>(systemElementCalculatorGateway, compositeRequestHeadersFactory), calculatorSystemElementUriCreator);
+        return new DefaultCalculatorSystemElementClient(new GenericClient<>(systemElementCalculatorGateway, compositeRequestHeadersFactory),
+                calculatorSystemElementUriCreator);
     }
 
     @Bean
@@ -57,4 +65,9 @@ public class CalculatorClientConfig {
                 calculatorStreamOutputFeatureUriCreator);
     }
 
+    @Bean
+    public CalculatorAvailableOutputFeatureClient calculatorAvailableOutputFeatureClient() {
+        return new DefaultCalculatorAvailableOutputFeatureClient(new GenericClient<>(availableOutputFeatureResponseGateway, compositeRequestHeadersFactory),
+                calculatorAvailableOutputFeatureUriCreator);
+    }
 }

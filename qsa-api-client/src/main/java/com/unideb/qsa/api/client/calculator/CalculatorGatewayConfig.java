@@ -106,4 +106,14 @@ public class CalculatorGatewayConfig {
                 .withHttpMethod(HttpMethod.GET)
                 .build();
     }
+
+    public GatewayConfiguration<List<OutputFeature>, GatewayException> availableOutputFeatureGatewayConfig() {
+        return new GatewayConfiguration.Builder<List<OutputFeature>, GatewayException>()
+                .withTargetApp(TARGET_APP_DISPLAY_NAME)
+                .withExceptionProvider(EXCEPTION_PROVIDER)
+                .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)
+                .withResponseType(new ParameterizedTypeReference<List<OutputFeature>>() {})
+                .withHttpMethod(HttpMethod.POST)
+                .build();
+    }
 }
