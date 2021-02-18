@@ -2,7 +2,6 @@ package com.unideb.qsa.api.server.filter;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.lang.NonNull;
@@ -37,11 +35,10 @@ public class LocationFilter extends OncePerRequestFilter {
     private static final String LOG_MESSAGE = "Request location resolved";
     private static final String COUNTRY_ID = "countryId";
     private static final String ERROR_PARSING_IP_ADDRESS = "Error parsing IP address";
+    private static final String ACTUATOR_ENDPOINT = "/actuator/info";
 
     @Autowired
     private LocationResolver locationResolver;
-    @Value("${geo.filtered-addresses}")
-    private List<String> filteredAddresses;
 
     @Override
     protected void doFilterInternal(
@@ -61,7 +58,7 @@ public class LocationFilter extends OncePerRequestFilter {
     private void reportLocation() throws IOException {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String ipAddress = request.getHeader(HEADER);
-        if (!filteredAddresses.contains(ipAddress)) {
+        if (!request.getServletPath().contains(ACTUATOR_ENDPOINT)) {
             String country = resolveCountry(ipAddress);
             MDC.put(COUNTRY_ID, country);
             LOG.info(LOG_MESSAGE);
