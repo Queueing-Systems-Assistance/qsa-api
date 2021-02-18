@@ -2,10 +2,12 @@ package com.unideb.qsa.api.implementation.geo;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.maxmind.geoip2.DatabaseReader;
@@ -24,6 +26,8 @@ public class LocationResolver {
 
     @Autowired(required = false)
     private DatabaseReader databaseReader;
+    @Value("${geo.filtered-addresses}")
+    private List<String> filteredAddresses;
 
     /**
      * Resolves country code based on IP address.
@@ -32,18 +36,18 @@ public class LocationResolver {
      */
     public String resolveCountryIsoCode(InetAddress ipAddress) {
         String result = "unknown";
-        try {
-            result = resolveCountry(ipAddress).getIsoCode();
-        } catch (RuntimeException | IOException | GeoIp2Exception e) {
-            LOG.error(FAILED_TO_RESOLVE_COUNTRY, e);
+        if (!filteredAddresses.contains(ipAddress.getHostAddress())) {
+            try {
+                result = resolveCountry(ipAddress).getIsoCode();
+            } catch (RuntimeException | IOException | GeoIp2Exception e) {
+                LOG.error(FAILED_TO_RESOLVE_COUNTRY, e);
+            }
         }
         return result;
     }
-
 
     private Country resolveCountry(InetAddress ipAddress) throws IOException, GeoIp2Exception {
         CountryResponse response = databaseReader.country(ipAddress);
         return response.getCountry();
     }
-
 }

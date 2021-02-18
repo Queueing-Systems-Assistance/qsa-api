@@ -71,4 +71,5 @@ graphql:
 geo:
   path: GeoLite2-City.mmdb
   enabled: false
+  filtered-addresses:
 
