@@ -16,7 +16,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 
 import com.maxmind.db.Reader;
@@ -33,17 +32,13 @@ import io.micrometer.core.instrument.config.MeterFilterReply;
 public class ServerConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerConfig.class);
-    private static final String GEO_CONFIGURATION_LOG = "Geo configuration [enabled={}],[path={}]";
+    private static final String GEO_CONFIGURATION_LOG = "Geo location is ENABLED [path={}]";
 
     @Value("${management.metrics.enabled}")
     private String[] enabledMetrics;
 
     @Autowired
     private BuildProperties buildProperties;
-    @Value("classpath:schema.graphqls")
-    private Resource resource;
-    @Value("${geo.enabled}")
-    private Boolean metricsGeoEnabled;
     @Value("${geo.path}")
     private String path;
 
@@ -70,7 +65,7 @@ public class ServerConfig {
     @Bean
     @ConditionalOnProperty(value = "geo.enabled", havingValue = "true")
     public DatabaseReader maxmindDatabaseReader() throws IOException {
-        LOG.info(GEO_CONFIGURATION_LOG, metricsGeoEnabled, path);
+        LOG.info(GEO_CONFIGURATION_LOG, path);
         return new DatabaseReader.Builder(new File(path))
                 .fileMode(Reader.FileMode.MEMORY)
                 .build();
