@@ -2,6 +2,7 @@ package com.unideb.qsa.api.server.filter;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -59,15 +60,18 @@ public class LocationFilter extends OncePerRequestFilter {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String ipAddress = request.getHeader(HEADER);
         if (!request.getServletPath().contains(ACTUATOR_ENDPOINT)) {
-            String country = resolveCountry(ipAddress);
-            MDC.put(COUNTRY_ID, country);
-            LOG.info(LOG_MESSAGE);
-            MDC.remove(COUNTRY_ID);
+            resolveCountry(ipAddress).ifPresent(this::reportCountry);
         }
     }
 
-    private String resolveCountry(String ipAddress) throws IOException {
+    private Optional<String> resolveCountry(String ipAddress) throws IOException {
         InetAddress inetAddress = InetAddress.getByName(ipAddress);
         return locationResolver.resolveCountryIsoCode(inetAddress);
+    }
+
+    private void reportCountry(String country) {
+        MDC.put(COUNTRY_ID, country);
+        LOG.info(LOG_MESSAGE);
+        MDC.remove(COUNTRY_ID);
     }
 }

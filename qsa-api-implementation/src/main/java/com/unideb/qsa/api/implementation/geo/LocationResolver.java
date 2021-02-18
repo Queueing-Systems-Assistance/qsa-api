@@ -2,6 +2,7 @@ package com.unideb.qsa.api.implementation.geo;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +31,10 @@ public class LocationResolver {
      * @param ipAddress IP address
      * @return resolved country code (eg. HU, GB, etc.)
      */
-    public String resolveCountryIsoCode(InetAddress ipAddress) {
-        String result = "unknown";
+    public Optional<String> resolveCountryIsoCode(InetAddress ipAddress) {
+        Optional<String> result = Optional.empty();
         try {
-            result = resolveCountry(ipAddress).getIsoCode();
+            result = Optional.of(resolveCountry(ipAddress).getIsoCode());
         } catch (RuntimeException | IOException | GeoIp2Exception e) {
             LOG.error(FAILED_TO_RESOLVE_COUNTRY, e);
         }
