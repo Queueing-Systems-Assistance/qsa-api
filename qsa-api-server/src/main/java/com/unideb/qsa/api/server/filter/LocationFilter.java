@@ -35,7 +35,7 @@ public class LocationFilter extends OncePerRequestFilter {
     private static final String LOG_MESSAGE = "Request location resolved";
     private static final String COUNTRY_ID = "countryId";
     private static final String ERROR_PARSING_IP_ADDRESS = "Error parsing IP address";
-    private static final String ACTUATOR_ENDPOINT = "/actuator/info";
+    private static final String ACTUATOR_ENDPOINT = "actuator";
 
     @Autowired
     private LocationResolver locationResolver;
