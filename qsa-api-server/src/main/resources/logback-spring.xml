@@ -4,7 +4,7 @@
 
     <appender name="CONSOLE_DEFAULT" class="ch.qos.logback.core.ConsoleAppender">
       <layout class="ch.qos.logback.classic.PatternLayout">
-        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5p) %green(%X{version:-NO_VERSION_SET} [requestId=%X{requestId:-NO_REQUEST}]) %cyan(%c) - %msg%n</pattern>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5p) %green(%X{version:-NO_VERSION_SET} [requestId=%X{requestId:-NO_REQUEST}]) %yellow([countryId=%X{countryId:-}]) %cyan(%c) - %msg%n</pattern>
       </layout>
     </appender>
 
@@ -27,6 +27,7 @@
 		"level": "%-5p",
 		"class": "%c",
 		"requestId": "%X{requestId:-NO_REQUEST}",
+		"countryId": "%X{countryId:-}",
 		"message": "%m",
 		"exception": "%ex"
 		}
