@@ -48,7 +48,7 @@ type InputFeature  {
     name:String
     description:String
     typeFraction:String
-    required:String
+    inputGroup:String
 }
 
 type OutputFeature  {
