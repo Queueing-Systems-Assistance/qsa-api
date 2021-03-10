@@ -14,7 +14,7 @@ public class InputFeature {
     private String name;
     private String description;
     private boolean typeFraction;
-    private boolean required;
+    private InputGroup inputGroup;
 
     public String getDescription() {
         return description;
@@ -32,12 +32,12 @@ public class InputFeature {
         this.typeFraction = typeFraction;
     }
 
-    public boolean isRequired() {
-        return required;
+    public InputGroup getInputGroup() {
+        return inputGroup;
     }
 
-    public void setRequired(final boolean required) {
-        this.required = required;
+    public void setInputGroup(final InputGroup inputGroup) {
+        this.inputGroup = inputGroup;
     }
 
     public String getId() {
