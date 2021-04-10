@@ -17,9 +17,9 @@ import com.unideb.qsa.api.client.config.gateway.GatewayConfiguration;
 import com.unideb.qsa.api.client.config.gateway.WebClientGateway;
 import com.unideb.qsa.api.client.config.request.DefaultQsaApiRequestComponentResolver;
 import com.unideb.qsa.api.client.config.request.QsaApiRequestComponent;
-import com.unideb.qsa.api.domain.api.exception.ClientException;
-import com.unideb.qsa.api.domain.api.exception.ErrorMessageException;
-import com.unideb.qsa.api.domain.api.exception.GatewayException;
+import com.unideb.qsa.api.domain.api.exception.GraphQLClientException;
+import com.unideb.qsa.api.domain.api.exception.GraphQLErrorMessageException;
+import com.unideb.qsa.api.domain.api.exception.GraphQLException;
 import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 
 /**
@@ -29,10 +29,10 @@ import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 public class FormulaHandlerGatewayConfig {
 
     private static final String TARGET_APP_DISPLAY_NAME = "Formula Handler";
-    private static final Map<HttpStatus, Function<ErrorResponse, GatewayException>> EXCEPTION_PROVIDER = Map.of(
-            HttpStatus.BAD_REQUEST, ErrorMessageException::new,
-            HttpStatus.NOT_FOUND, ClientException::new,
-            HttpStatus.INTERNAL_SERVER_ERROR, GatewayException::new);
+    private static final Map<HttpStatus, Function<ErrorResponse, GraphQLException>> EXCEPTION_PROVIDER = Map.of(
+            HttpStatus.BAD_REQUEST, GraphQLErrorMessageException::new,
+            HttpStatus.NOT_FOUND, GraphQLClientException::new,
+            HttpStatus.INTERNAL_SERVER_ERROR, GraphQLException::new);
     private static final DefaultQsaApiRequestComponentResolver REQUEST_COMPONENT_RESOLVER = new DefaultQsaApiRequestComponentResolver(List.of(
             QsaApiRequestComponent.URL,
             QsaApiRequestComponent.HEADERS,
@@ -56,8 +56,8 @@ public class FormulaHandlerGatewayConfig {
         return new WebClientGateway<>(webClient, formulaCalculatedGatewayConfig());
     }
 
-    private GatewayConfiguration<String, GatewayException> formulaDefaultGatewayConfig() {
-        return new GatewayConfiguration.Builder<String, GatewayException>()
+    private GatewayConfiguration<String, GraphQLException> formulaDefaultGatewayConfig() {
+        return new GatewayConfiguration.Builder<String, GraphQLException>()
                 .withTargetApp(TARGET_APP_DISPLAY_NAME)
                 .withExceptionProvider(EXCEPTION_PROVIDER)
                 .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)
@@ -66,8 +66,8 @@ public class FormulaHandlerGatewayConfig {
                 .build();
     }
 
-    private GatewayConfiguration<String, GatewayException> formulaStepsGatewayConfig() {
-        return new GatewayConfiguration.Builder<String, GatewayException>()
+    private GatewayConfiguration<String, GraphQLException> formulaStepsGatewayConfig() {
+        return new GatewayConfiguration.Builder<String, GraphQLException>()
                 .withTargetApp(TARGET_APP_DISPLAY_NAME)
                 .withExceptionProvider(EXCEPTION_PROVIDER)
                 .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)
@@ -76,8 +76,8 @@ public class FormulaHandlerGatewayConfig {
                 .build();
     }
 
-    private GatewayConfiguration<String, GatewayException> formulaCalculatedGatewayConfig() {
-        return new GatewayConfiguration.Builder<String, GatewayException>()
+    private GatewayConfiguration<String, GraphQLException> formulaCalculatedGatewayConfig() {
+        return new GatewayConfiguration.Builder<String, GraphQLException>()
                 .withTargetApp(TARGET_APP_DISPLAY_NAME)
                 .withExceptionProvider(EXCEPTION_PROVIDER)
                 .withRequestComponentsMessageResolver(REQUEST_COMPONENT_RESOLVER)

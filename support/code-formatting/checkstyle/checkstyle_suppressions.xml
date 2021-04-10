@@ -12,6 +12,7 @@
 	<!-- Config classes -->
 	<suppress checks="MissingJavadocMethod" files=".*[/\\]*Config" />
 	<suppress checks="MissingJavadocMethod" files=".*[/\\]*.config.*" />
+	<suppress checks="ClassFanOutComplexity" files=".*[/\\]*.Config*" />
 	<!-- Test classes -->
 	<suppress checks="MagicNumber" files=".*[/\\]*Test" />
 	<suppress checks="JavadocMethod" files=".*[/\\]*Test" />

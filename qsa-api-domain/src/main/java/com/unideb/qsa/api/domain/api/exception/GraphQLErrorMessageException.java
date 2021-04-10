@@ -7,9 +7,9 @@ import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 /**
  * Exception for error messages.
  */
-public class ErrorMessageException extends GatewayException {
+public class GraphQLErrorMessageException extends GraphQLException {
 
-    public ErrorMessageException(ErrorResponse errorResponse) {
+    public GraphQLErrorMessageException(ErrorResponse errorResponse) {
         super(errorResponse);
     }
 

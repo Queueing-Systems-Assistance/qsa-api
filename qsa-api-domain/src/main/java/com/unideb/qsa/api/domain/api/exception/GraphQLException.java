@@ -11,9 +11,9 @@ import graphql.language.SourceLocation;
 import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 
 /**
- * Exceptions for internal server errors.
+ * Error representation for response.
  */
-public class GatewayException extends ApiInternalException implements GraphQLError {
+public class GraphQLException extends ApiInternalException implements GraphQLError {
 
     private static final String NO_MESSAGE = null;
     private static final Map<String, Object> NO_EXTENSIONS = Map.of();
@@ -22,11 +22,11 @@ public class GatewayException extends ApiInternalException implements GraphQLErr
 
     private final ErrorResponse errorResponse;
 
-    public GatewayException() {
+    public GraphQLException() {
         errorResponse = NO_ERROR_RESPONSE;
     }
 
-    public GatewayException(ErrorResponse errorResponse) {
+    public GraphQLException(ErrorResponse errorResponse) {
         this.errorResponse = errorResponse;
     }
 

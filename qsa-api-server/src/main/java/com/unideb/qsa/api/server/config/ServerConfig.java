@@ -3,9 +3,11 @@ package com.unideb.qsa.api.server.config;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 import com.maxmind.db.Reader;
 import com.maxmind.geoip2.DatabaseReader;
@@ -29,10 +35,11 @@ import io.micrometer.core.instrument.config.MeterFilterReply;
  * Configuration for the server.
  */
 @Configuration
+@EnableAspectJAutoProxy
 public class ServerConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerConfig.class);
-    private static final String GEO_CONFIGURATION_LOG = "Geo location is ENABLED [path={}]";
+    private static final String GEO_CONFIGURATION_LOG = "Geo location [path={}]";
 
     @Value("${management.metrics.enabled}")
     private String[] enabledMetrics;
@@ -71,4 +78,17 @@ public class ServerConfig {
                 .build();
     }
 
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new AcceptHeaderLocaleResolver() {
+            @NonNull
+            @Override
+            public Locale resolveLocale(@NonNull HttpServletRequest request) {
+                String acceptHeaderLocale = request.getHeader(HttpHeaders.ACCEPT_LANGUAGE);
+                return Optional.ofNullable(acceptHeaderLocale).map(Locale::new).orElse(new Locale("en_US"));
+            }
+        };
+    }
+
 }
+

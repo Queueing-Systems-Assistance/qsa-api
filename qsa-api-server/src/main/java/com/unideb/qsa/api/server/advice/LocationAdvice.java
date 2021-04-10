@@ -1,68 +1,59 @@
-package com.unideb.qsa.api.server.filter;
+package com.unideb.qsa.api.server.advice;
 
 import java.io.IOException;
 import java.net.InetAddress;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.core.annotation.Order;
-import org.springframework.lang.NonNull;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.unideb.qsa.api.implementation.geo.LocationResolver;
 
 /**
- * Filter for reporting geolocation.
+ * Advice to resolve & report the request location based on its IP address.
  */
+@Aspect
 @Component
-@Order(value = 3)
-@ConditionalOnProperty(value = "geo.enabled", havingValue = "true")
-public class LocationFilter extends OncePerRequestFilter {
+@Profile("!dev")
+public class LocationAdvice {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocationFilter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocationAdvice.class);
     private static final String HEADER = "X-Metrics-IP";
     private static final String LOG_MESSAGE = "Request location resolved";
     private static final String COUNTRY_ID = "countryId";
     private static final String ERROR_PARSING_IP_ADDRESS = "Error parsing IP address";
-    private static final String ACTUATOR_ENDPOINT = "actuator";
 
     @Autowired
     private LocationResolver locationResolver;
 
-    @Override
-    protected void doFilterInternal(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain) throws ServletException, IOException {
-        try {
-            reportLocation();
-        } catch (IOException exception) {
-            LOG.warn(ERROR_PARSING_IP_ADDRESS, exception);
-        } finally {
-            super.doFilter(request, response, filterChain);
-        }
-    }
-
-
-    private void reportLocation() throws IOException {
+    /**
+     * Advices the system element calculation.
+     * We need to advice only this part of the code, so that when requesting i18n elements we won't report the country.
+     */
+    @Before("execution(* com.unideb.qsa.api.implementation.graphql.SystemElementsGraphQLFetcher.getSystemElements(*))")
+    public void adviceSystemElements() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String ipAddress = request.getHeader(HEADER);
-        if (!request.getServletPath().contains(ACTUATOR_ENDPOINT)) {
+        reportLocation(ipAddress);
+    }
+
+    private void reportLocation(String ipAddress) {
+        try {
             String country = resolveCountry(ipAddress);
             MDC.put(COUNTRY_ID, country);
             LOG.info(LOG_MESSAGE);
             MDC.remove(COUNTRY_ID);
+        } catch (IOException exception) {
+            LOG.warn(ERROR_PARSING_IP_ADDRESS, exception);
         }
     }
 
@@ -70,4 +61,5 @@ public class LocationFilter extends OncePerRequestFilter {
         InetAddress inetAddress = InetAddress.getByName(ipAddress);
         return locationResolver.resolveCountryIsoCode(inetAddress);
     }
+
 }
