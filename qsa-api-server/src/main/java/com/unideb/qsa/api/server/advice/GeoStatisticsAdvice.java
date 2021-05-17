@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.unideb.qsa.api.implementation.geo.CountryResolver;
 import com.unideb.qsa.api.implementation.geo.LocationResolver;
 
 /**
@@ -24,14 +25,18 @@ import com.unideb.qsa.api.implementation.geo.LocationResolver;
 @Aspect
 @Component
 @Profile("!dev")
-public class LocationAdvice {
+public class GeoStatisticsAdvice {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocationAdvice.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GeoStatisticsAdvice.class);
     private static final String HEADER = "X-Metrics-IP";
-    private static final String LOG_MESSAGE = "Request location resolved";
+    private static final String REQUEST_COUNTRY_RESOLVED = "Request country resolved";
+    private static final String REQUEST_LOCATION_RESOLVED = "Request location resolved";
     private static final String COUNTRY_ID = "countryId";
+    private static final String LOCATION = "location";
     private static final String ERROR_PARSING_IP_ADDRESS = "Error parsing IP address";
 
+    @Autowired
+    private CountryResolver countryResolver;
     @Autowired
     private LocationResolver locationResolver;
 
@@ -48,18 +53,25 @@ public class LocationAdvice {
 
     private void reportLocation(String ipAddress) {
         try {
-            String country = resolveCountry(ipAddress);
-            MDC.put(COUNTRY_ID, country);
-            LOG.info(LOG_MESSAGE);
-            MDC.remove(COUNTRY_ID);
+            InetAddress inetAddress = InetAddress.getByName(ipAddress);
+            reportCountry(inetAddress);
+            reportLocation(inetAddress);
         } catch (IOException exception) {
             LOG.warn(ERROR_PARSING_IP_ADDRESS, exception);
         }
     }
 
-    private String resolveCountry(String ipAddress) throws IOException {
-        InetAddress inetAddress = InetAddress.getByName(ipAddress);
-        return locationResolver.resolveCountryIsoCode(inetAddress);
+    private void reportCountry(InetAddress inetAddress) {
+        String country = countryResolver.resolveCountryIsoCode(inetAddress);
+        MDC.put(COUNTRY_ID, country);
+        LOG.info(REQUEST_COUNTRY_RESOLVED);
+        MDC.remove(COUNTRY_ID);
     }
 
+    private void reportLocation(InetAddress inetAddress) {
+        String country = locationResolver.resolveLocationGeoPoint(inetAddress);
+        MDC.put(LOCATION, country);
+        LOG.info(REQUEST_LOCATION_RESOLVED);
+        MDC.remove(LOCATION);
+    }
 }
