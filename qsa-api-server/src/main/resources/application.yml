@@ -62,12 +62,6 @@ client:
       formula-default: /lab/api/formula-handler/formula/default/%s/%s
       formula-steps: /lab/api/formula-handler/formula/steps/%s/%s
       formula-calculated: /lab/api/formula-handler/formula/calculated/%s/%s
-  i18n-service:
-    scheme: https
-    host: qsa.inf.unideb.hu
-    port: 443
-    endpoint:
-      keys: /lab/api/i18n/keys
 
 # Geolocation
 geo:

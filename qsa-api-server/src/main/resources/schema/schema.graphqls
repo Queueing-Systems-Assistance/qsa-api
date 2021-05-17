@@ -2,9 +2,6 @@ type Query {
     systemElements(
         systemIds:[String!]
     ):[SystemElement!]
-    i18nElements(
-        keys:[String!]
-    ):[I18nElement!]
 }
 
 input FeatureCondition {
@@ -68,14 +65,4 @@ type OutputFeature  {
 type StreamOutputFeature  {
     outputFeatures:[OutputFeature!]!
     stream:[Float!]!
-}
-
-type I18nElement {
-    key:String!
-    values:[I18nValue!]!
-}
-
-type I18nValue {
-    locale:String!
-    i18n:String!
 }

@@ -3,7 +3,7 @@
 ### Project description
 
 This service is the door, acts as a facade for the QSA architecture.
-It creates a main entry point using GraphQL to call the underlying services such as calculator, formula-handler, i18n-service, etc. 
+It creates a main entry point using GraphQL to call the underlying services such as calculator, formula-handler, etc. 
 
 ### Endpoints
 
