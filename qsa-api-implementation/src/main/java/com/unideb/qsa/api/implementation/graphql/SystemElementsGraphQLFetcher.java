@@ -6,24 +6,20 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-
-import graphql.schema.DataFetchingEnvironment;
+import com.netflix.graphql.dgs.DgsComponent;
+import com.netflix.graphql.dgs.DgsData;
+import com.netflix.graphql.dgs.InputArgument;
 
 import com.unideb.qsa.api.client.calculator.system.CalculatorSystemElementClient;
 import com.unideb.qsa.api.domain.api.response.SystemElement;
-import com.unideb.qsa.api.implementation.updater.LocaleUpdater;
 
 /**
- * GraphQL query to resolve system elements.
+ * Fetches a system element.
  */
-@Component
-public class SystemGraphQLQueryResolver implements GraphQLQueryResolver {
+@DgsComponent
+public class SystemElementsGraphQLFetcher {
 
-    @Autowired
-    private LocaleUpdater localeUpdater;
     @Autowired
     private CalculatorSystemElementClient calculatorSystemElementClient;
 
@@ -32,8 +28,9 @@ public class SystemGraphQLQueryResolver implements GraphQLQueryResolver {
      * @param systemIds requested system ids
      * @return resolved {@link SystemElement}s.
      */
-    public List<SystemElement> getSystemElements(@Nullable List<String> systemIds, DataFetchingEnvironment environment) {
-        localeUpdater.updateLocale(environment.getContext());
+    @DgsData(parentType = "Query", field = "systemElements")
+    public List<SystemElement> getSystemElements(
+            @Nullable @InputArgument List<String> systemIds) {
         List<String> requestedSystemElements = resolveSystemIds(systemIds);
         return new ArrayList<>(calculatorSystemElementClient.getSystems(requestedSystemElements));
     }

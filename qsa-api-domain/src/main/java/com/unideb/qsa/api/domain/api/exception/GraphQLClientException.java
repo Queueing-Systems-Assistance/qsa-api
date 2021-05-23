@@ -7,12 +7,9 @@ import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 /**
  * Exception for client exceptions.
  */
-public class ClientException extends GatewayException {
+public class GraphQLClientException extends GraphQLException {
 
-    public ClientException() {
-    }
-
-    public ClientException(ErrorResponse errorResponse) {
+    public GraphQLClientException(ErrorResponse errorResponse) {
         super(errorResponse);
     }
 

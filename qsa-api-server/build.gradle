@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.1'
+	id 'org.springframework.boot' version '2.4.4'
 }
 
 dependencies {
@@ -8,14 +8,14 @@ dependencies {
 	implementation project(':qsa-api-client')
 	implementation project(':qsa-api-implementation')
 	/* DEPENDENCY */
-	implementation 'com.graphql-java:graphql-spring-boot-starter'
-	implementation 'com.graphql-java:graphql-java-tools'
 	implementation 'com.maxmind.geoip2:geoip2'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework:spring-aspects'
 	implementation 'net.logstash.logback:logstash-logback-encoder'
 	implementation 'io.micrometer:micrometer-registry-prometheus'
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
 }
 
 description = 'qsa-api-server'

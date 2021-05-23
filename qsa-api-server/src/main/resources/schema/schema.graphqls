@@ -1,0 +1,68 @@
+type Query {
+    systemElements(
+        systemIds:[String!]
+    ):[SystemElement!]
+}
+
+input FeatureCondition {
+    id:String!
+    value:Float!
+}
+
+input StreamOutput {
+    featureId:String!
+    from:Float!
+    to:Float!
+    steps:Float!
+}
+
+type SystemElement {
+    id:String!
+    name:String!
+    description:String!
+    status:String!
+    inputs:[InputFeature!]!
+    availableOutputs(
+        requestedOutputFeatureIds:[String!]
+    ): [OutputFeature!]
+    outputs(
+        inputFeatureConditions:[FeatureCondition!]
+        requestedOutputFeatureIds:[String!]
+    ): [OutputFeature!]
+    outputsStream(
+        inputFeatureConditions:[FeatureCondition!]
+        requestedOutputFeatureIds:[String!]
+        stream:StreamOutput!
+    ): StreamOutputFeature
+    formula(
+        featureId:String!
+        inputFeatureConditions:[FeatureCondition!]
+        formulaType: FormulaType!
+    ): String
+}
+
+enum FormulaType {
+    DEFAULT
+    STEPS
+    CALCULATED
+}
+
+type InputFeature  {
+    id:String!
+    name:String!
+    description:String!
+    typeFraction:String!
+    inputGroup:String!
+}
+
+type OutputFeature  {
+    id:String!
+    name:String!
+    description:String!
+    values:[String!]!
+}
+
+type StreamOutputFeature  {
+    outputFeatures:[OutputFeature!]!
+    stream:[Float!]!
+}

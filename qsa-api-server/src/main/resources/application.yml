@@ -63,10 +63,6 @@ client:
       formula-steps: /lab/api/formula-handler/formula/steps/%s/%s
       formula-calculated: /lab/api/formula-handler/formula/calculated/%s/%s
 
-graphql:
-  servlet:
-    exception-handlers-enabled: true
-
 # Geolocation
 geo:
   path: GeoLite2-City.mmdb

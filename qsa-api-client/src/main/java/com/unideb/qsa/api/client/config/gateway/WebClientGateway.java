@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 
 import com.unideb.qsa.api.client.config.request.QsaApiRequest;
 import com.unideb.qsa.api.domain.api.exception.ApiInternalException;
-import com.unideb.qsa.api.domain.api.exception.GatewayException;
+import com.unideb.qsa.api.domain.api.exception.GraphQLException;
 import com.unideb.qsa.api.domain.api.response.ErrorResponse;
 
 /**
@@ -53,7 +53,7 @@ public class WebClientGateway<RESPONSE> implements Gateway<RESPONSE> {
 
     private Mono<Throwable> handleError(HttpStatus httpStatus, ClientResponse clientResponse) {
         return clientResponse.bodyToMono(ErrorResponse.class)
-                             .switchIfEmpty(Mono.error(new GatewayException()))
+                             .switchIfEmpty(Mono.error(new GraphQLException()))
                              .flatMap(errorResponse -> Mono.error(gatewayConfiguration.getExceptionProvider(httpStatus).apply(errorResponse)));
     }
 
