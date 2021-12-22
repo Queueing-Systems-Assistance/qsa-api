@@ -9,15 +9,15 @@ import java.util.Optional;
  */
 public class OutputFeatureRequest {
 
-    private Map<String, String> featureConditions;
+    private Map<String, Double> featureConditions;
     private List<String> outputFeatureIds = List.of();
 
 
-    public Map<String, String> getFeatureConditions() {
+    public Map<String, Double> getFeatureConditions() {
         return featureConditions;
     }
 
-    public void setFeatureConditions(final Map<String, String> featureConditions) {
+    public void setFeatureConditions(final Map<String, Double> featureConditions) {
         this.featureConditions = featureConditions;
     }
 

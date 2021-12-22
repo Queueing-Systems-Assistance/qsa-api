@@ -26,7 +26,7 @@ public class DefaultFormulaHandlerFormulaCalculatedClient implements FormulaHand
     @Override
     public String getFormulaCalculated(String systemId, String featureId, List<FeatureCondition> featureConditions) {
         URI uri = uriCreator.createUri(systemId, featureId);
-        Map<String, String> requestBody = featureConditions.stream().collect(Collectors.toMap(FeatureCondition::getId, FeatureCondition::getValue));
+        Map<String, Double> requestBody = featureConditions.stream().collect(Collectors.toMap(FeatureCondition::getId, FeatureCondition::getValue));
         return genericClient.call(requestBody, uri);
     }
 }
