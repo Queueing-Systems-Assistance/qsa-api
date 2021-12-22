@@ -7,9 +7,9 @@ package com.unideb.qsa.api.domain.api.request;
 public class StreamOutput {
 
     private String featureId;
-    private Float from;
-    private Float to;
-    private Float steps;
+    private Double from;
+    private Double to;
+    private Double steps;
 
     public String getFeatureId() {
         return featureId;
@@ -19,27 +19,27 @@ public class StreamOutput {
         this.featureId = featureId;
     }
 
-    public Float getFrom() {
+    public Double getFrom() {
         return from;
     }
 
-    public void setFrom(final Float from) {
+    public void setFrom(final Double from) {
         this.from = from;
     }
 
-    public Float getSteps() {
+    public Double getSteps() {
         return steps;
     }
 
-    public void setSteps(final Float steps) {
+    public void setSteps(final Double steps) {
         this.steps = steps;
     }
 
-    public Float getTo() {
+    public Double getTo() {
         return to;
     }
 
-    public void setTo(final Float to) {
+    public void setTo(final Double to) {
         this.to = to;
     }
 

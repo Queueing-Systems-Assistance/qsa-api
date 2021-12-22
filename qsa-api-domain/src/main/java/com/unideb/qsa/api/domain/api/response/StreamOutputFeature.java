@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class StreamOutputFeature {
 
     private List<OutputFeature> outputFeatures;
-    private List<Float> stream;
+    private List<Double> stream;
 
     public List<OutputFeature> getOutputFeatures() {
         return Optional.ofNullable(outputFeatures).orElse(Collections.emptyList());
@@ -25,11 +25,11 @@ public class StreamOutputFeature {
         this.outputFeatures = outputFeatures;
     }
 
-    public List<Float> getStream() {
+    public List<Double> getStream() {
         return Optional.ofNullable(stream).orElse(Collections.emptyList());
     }
 
-    public void setStream(final List<Float> stream) {
+    public void setStream(final List<Double> stream) {
         this.stream = stream;
     }
 }

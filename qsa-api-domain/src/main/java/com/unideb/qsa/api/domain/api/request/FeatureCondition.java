@@ -5,15 +5,23 @@ package com.unideb.qsa.api.domain.api.request;
  */
 public class FeatureCondition {
 
-    private String value;
+    private Double value;
     private String id;
 
     public String getId() {
         return id;
     }
 
-    public String getValue() {
+    public Double getValue() {
         return value;
+    }
+
+    public void setValue(final Double value) {
+        this.value = value;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     @Override
