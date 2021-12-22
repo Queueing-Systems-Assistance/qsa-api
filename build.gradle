@@ -21,13 +21,12 @@ allprojects {
   apply plugin: 'java'
   apply plugin: 'java-library'
   apply plugin: 'io.spring.dependency-management'
-  apply plugin: 'maven'
+  apply plugin: 'maven-publish'
   apply plugin: 'checkstyle'
 
   repositories {
     mavenLocal()
     mavenCentral()
-    jcenter()
     maven {
       url 'https://jitpack.io'
     }
@@ -37,27 +36,27 @@ allprojects {
     dependencies {
       /* DEPENDENCY */
       imports {
-        mavenBom('org.springframework.boot:spring-boot-dependencies:2.4.4')
+        mavenBom('org.springframework.boot:spring-boot-dependencies:2.6.1')
       }
-      dependency 'com.fasterxml.jackson.core:jackson-core:2.12.0'
-      dependency 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
-      dependency 'com.fasterxml.jackson.core:jackson-annotations:2.12.0'
-      dependency 'io.projectreactor:reactor-core:3.4.4'
-      dependency 'com.graphql-java:graphql-java:16.2'
-      dependency 'com.maxmind.geoip2:geoip2:2.15.0'
-      dependency 'io.micrometer:micrometer-registry-prometheus:1.6.5'
-      dependency 'net.logstash.logback:logstash-logback-encoder:6.6'
-      dependency 'org.springframework:spring-context:5.3.5'
-      dependency 'org.springframework:spring-aspects:5.3.5'
-      dependency 'org.springframework.boot:spring-boot-starter-web:2.4.4'
-      dependency 'org.springframework.boot:spring-boot-starter-actuator:2.4.4'
-      dependency 'org.springframework.boot:spring-boot-starter-webflux:2.4.4'
-      dependency 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:latest.release'
+      dependency 'com.fasterxml.jackson.core:jackson-core:2.13.1'
+      dependency 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+      dependency 'com.fasterxml.jackson.core:jackson-annotations:2.13.1'
+      dependency 'io.projectreactor:reactor-core:3.4.13'
+      dependency 'com.graphql-java:graphql-java:17.3'
+      dependency 'com.maxmind.geoip2:geoip2:2.16.1'
+      dependency 'io.micrometer:micrometer-registry-prometheus:1.8.1'
+      dependency 'net.logstash.logback:logstash-logback-encoder:7.0.1'
+      dependency 'org.springframework:spring-context:5.3.14'
+      dependency 'org.springframework:spring-aspects:5.3.14'
+      dependency 'org.springframework.boot:spring-boot-starter-web:2.6.1'
+      dependency 'org.springframework.boot:spring-boot-starter-actuator:2.6.1'
+      dependency 'org.springframework.boot:spring-boot-starter-webflux:2.6.1'
+      dependency 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:4.9.14'
     }
   }
 
   checkstyle {
-    toolVersion = '8.38'
+    toolVersion = '9.2'
     configFile = file("${rootDir}/support/code-formatting/checkstyle/checkstyle.xml")
     configDirectory = file("${rootDir}/support/code-formatting/checkstyle/")
     showViolations = true
@@ -66,7 +65,7 @@ allprojects {
 
   group = projectGroup
   version = projectVersion
-  sourceCompatibility = '11'
+  sourceCompatibility = '17'
 
   tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
