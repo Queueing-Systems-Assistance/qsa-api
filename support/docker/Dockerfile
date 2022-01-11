@@ -6,6 +6,7 @@ EXPOSE 8080
 
 ENV DIRPATH /qsa-storage/qsa-api
 RUN mkdir -p $DIRPATH
+RUN apt-get update && apt-get install -y curl
 
 COPY ./qsa-api-server/build/libs/qsa-api-final.jar $DIRPATH/qsa-api.jar
 COPY ./support/docker/init.sh $DIRPATH/init.sh
