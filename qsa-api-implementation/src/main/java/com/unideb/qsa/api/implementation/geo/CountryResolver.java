@@ -32,10 +32,14 @@ public class CountryResolver {
      */
     public String resolveCountryIsoCode(InetAddress ipAddress) {
         String result = "unknown";
-        try {
-            result = resolveCountry(ipAddress).getIsoCode();
-        } catch (RuntimeException | IOException | GeoIp2Exception e) {
-            LOG.error(FAILED_TO_RESOLVE_COUNTRY, e);
+        if (isUniversityAddress(ipAddress)) {
+            result = "HU";
+        } else {
+            try {
+                result = resolveCountry(ipAddress).getIsoCode();
+            } catch (RuntimeException | IOException | GeoIp2Exception e) {
+                LOG.error(FAILED_TO_RESOLVE_COUNTRY, e);
+            }
         }
         return result;
     }
@@ -43,5 +47,9 @@ public class CountryResolver {
     private Country resolveCountry(InetAddress ipAddress) throws IOException, GeoIp2Exception {
         CountryResponse response = databaseReader.country(ipAddress);
         return response.getCountry();
+    }
+
+    private boolean isUniversityAddress(InetAddress ipAddress) {
+        return ipAddress.isSiteLocalAddress();
     }
 }
