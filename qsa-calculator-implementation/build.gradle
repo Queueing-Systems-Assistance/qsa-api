@@ -1,0 +1,19 @@
+dependencies {
+  /* PROJECT */
+  implementation project(':qsa-calculator-domain')
+  /* QSA */
+  implementation project(':qsa-config-resolver')
+  /* DEPENDENCY */
+  implementation 'com.amazonaws:aws-java-sdk-lambda'
+  implementation 'com.google.guava:guava'
+  implementation 'org.apache.commons:commons-math3'
+  implementation 'org.slf4j:slf4j-api'
+  implementation 'org.springframework:spring-context'
+  implementation 'org.springframework.boot:spring-boot-starter-webflux'
+  /* TEST */
+  testImplementation 'org.testng:testng'
+  testImplementation 'org.mockito:mockito-core'
+}
+
+description = 'qsa-calculator-implementation'
+test.enabled = !gradle.startParameter.taskNames.contains('integrationTest')

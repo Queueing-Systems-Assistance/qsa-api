@@ -1,0 +1,176 @@
+[
+  {
+    "id": "Lambda",
+    "values": [
+      "1.3"
+    ]
+  },
+  {
+    "id": "SAvg",
+    "values": [
+      "0.33076923076923076"
+    ]
+  },
+  {
+    "id": "eSPow2",
+    "values": [
+      "2.769230769230769"
+    ]
+  },
+  {
+    "id": "eSPow3",
+    "values": [
+      "3.5384615384615383"
+    ]
+  },
+  {
+    "id": "D2S1",
+    "values": [
+      "2.84"
+    ]
+  },
+  {
+    "id": "D2S2",
+    "values": [
+      "1.99"
+    ]
+  },
+  {
+    "id": "D2S3",
+    "values": [
+      "The <b>E[S<sub>3</sub>]</b> value should be higher than <b>0</b>",
+      "The <b>╬╗<sub>3</sub></b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>2</sup>]</b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>3</sup>]</b> value should be higher than <b>0</b>"
+    ]
+  },
+  {
+    "id": "Ro",
+    "values": [
+      "0.43"
+    ]
+  },
+  {
+    "id": "P0",
+    "values": [
+      "0.5700000000000001"
+    ]
+  },
+  {
+    "id": "WAvg",
+    "values": [
+      "3.157894736842105"
+    ]
+  },
+  {
+    "id": "EW2",
+    "values": [
+      "22.634656817482295"
+    ]
+  },
+  {
+    "id": "D2W",
+    "values": [
+      "12.66235764850723"
+    ]
+  },
+  {
+    "id": "QAvg",
+    "values": [
+      "4.105263157894736"
+    ]
+  },
+  {
+    "id": "TAvg1",
+    "values": [
+      "3.5578947368421048"
+    ]
+  },
+  {
+    "id": "TAvg2",
+    "values": [
+      "3.257894736842105"
+    ]
+  },
+  {
+    "id": "TAvg3",
+    "values": [
+      "The <b>E[S<sub>3</sub>]</b> value should be higher than <b>0</b>",
+      "The <b>╬╗<sub>3</sub></b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>2</sup>]</b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>3</sup>]</b> value should be higher than <b>0</b>"
+    ]
+  },
+  {
+    "id": "TAvg",
+    "values": [
+      "3.488663967611336"
+    ]
+  },
+  {
+    "id": "ET2c1",
+    "values": [
+      "28.16097260695598"
+    ]
+  },
+  {
+    "id": "ET2c2",
+    "values": [
+      "25.26623576485072"
+    ]
+  },
+  {
+    "id": "ET2c3",
+    "values": [
+      "The <b>E[S<sub>3</sub>]</b> value should be higher than <b>0</b>",
+      "The <b>╬╗<sub>3</sub></b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>2</sup>]</b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>3</sup>]</b> value should be higher than <b>0</b>"
+    ]
+  },
+  {
+    "id": "ET2",
+    "values": [
+      "27.492956412623997"
+    ]
+  },
+  {
+    "id": "D2T1",
+    "values": [
+      "15.50235764850723"
+    ]
+  },
+  {
+    "id": "D2T2",
+    "values": [
+      "14.65235764850723"
+    ]
+  },
+  {
+    "id": "D2T3",
+    "values": [
+      "The <b>E[S<sub>3</sub>]</b> value should be higher than <b>0</b>",
+      "The <b>╬╗<sub>3</sub></b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>2</sup>]</b> value should be higher than <b>0</b>",
+      "The <b>E[S<sub>3</sub><sup>3</sup>]</b> value should be higher than <b>0</b>"
+    ]
+  },
+  {
+    "id": "D2T",
+    "values": [
+      "15.32218013371433"
+    ]
+  },
+  {
+    "id": "NAvg",
+    "values": [
+      "4.535263157894737"
+    ]
+  },
+  {
+    "id": "ECost",
+    "values": [
+      "15.82857894736842"
+    ]
+  }
+]

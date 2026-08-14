@@ -1,0 +1,10 @@
+description = 'qsa-calculator-domain'
+
+dependencies {
+  /* DEPENDENCY */
+  implementation 'com.fasterxml.jackson.core:jackson-core'
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+  implementation 'com.fasterxml.jackson.core:jackson-annotations'
+}
+
+test.enabled = !gradle.startParameter.taskNames.contains('integrationTest')

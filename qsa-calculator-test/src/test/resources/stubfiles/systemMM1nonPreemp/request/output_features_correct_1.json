@@ -1,0 +1,15 @@
+{
+  "featureConditions": {
+    "Lambda1": 2,
+    "Lambda2": 1,
+    "Mu": 4,
+    "n": 5,
+    "t": 2,
+    "r": 2,
+    "CS": 1.0,
+    "CWS": 2.2,
+    "CI": 3.3,
+    "CSR": 4.4,
+    "R": 1.1
+  }
+}

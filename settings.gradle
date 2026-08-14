@@ -1,5 +1,21 @@
 rootProject.name = 'qsa-api'
 
+// config
+include(':qsa-config-resolver')
+// i18n
+include(':qsa-i18n-domain')
+include(':qsa-i18n-retriever')
+include(':qsa-i18n-updater')
+// formula-handler
+include(':qsa-formula-handler-domain')
+include(':qsa-formula-handler-implementation')
+include(':qsa-formula-handler-server')
+// calculator
+include(':qsa-calculator-domain')
+include(':qsa-calculator-implementation')
+include(':qsa-calculator-server')
+include(':qsa-calculator-test')
+// api
 include(':qsa-api-domain')
 include(':qsa-api-client')
 include(':qsa-api-implementation')
